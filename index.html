@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Esthétique — Салон красоты и стиля</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --emerald: #0f3d3e;
+            --emerald-dark: #0a2a2b;
+            --emerald-light: #1a5253;
+            --gold: #c9a961;
+            --gold-light: #e6c98e;
+            --cream: #f8f5f0;
+            --charcoal: #2d2d2d;
+            --gray: #6b7280;
+            --white: #ffffff;
+            --shadow: 0 20px 60px rgba(15, 61, 62, 0.3);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.8;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.4s;
+            background: transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(15, 61, 62, 0.95);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .logo span { color: var(--gold); }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 400;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .btn-nav {
+            padding: 0.9rem 2.5rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-nav:hover {
+            background: var(--gold);
+            color: var(--emerald);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 2px;
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(15,61,62,0.95) 0%, rgba(26,82,83,0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=1920') center/cover;
+            color: var(--white);
+            padding: 0 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(15,61,62,0.4) 100%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+            display: block;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            line-height: 1;
+            margin-bottom: 2.5rem;
+            font-style: italic;
+        }
+
+        .hero h1 br { display: none; }
+        @media (min-width: 768px) { .hero h1 br { display: block; } }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-hero {
+            padding: 1.3rem 4rem;
+            background: var(--gold);
+            color: var(--emerald);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.4s;
+            display: inline-block;
+            border: none;
+        }
+
+        .btn-hero:hover {
+            background: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--white);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-15px); }
+            60% { transform: translateX(-50%) translateY(-8px); }
+        }
+
+        /* Section Styles */
+        section { padding: 8rem 2rem; }
+
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+            position: relative;
+        }
+
+        .section-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            color: var(--emerald);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201,169,97,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-img-wrapper {
+            position: relative;
+            padding: 20px;
+            border: 1px solid var(--gold);
+        }
+
+        .about-img-main {
+            width: 100%;
+            height: 550px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-img-accent {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 200px;
+            height: 280px;
+            object-fit: cover;
+            border: 8px solid var(--white);
+            box-shadow: var(--shadow);
+            z-index: 2;
+        }
+
+        .about-content h3 {
+            font-size: 3rem;
+            margin-bottom: 2.5rem;
+            color: var(--emerald);
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-top: 3rem;
+            font-style: italic;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .signature::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--emerald);
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--emerald);
+            color: var(--white);
+        }
+
+        .services .section-title { color: var(--white); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.05);
+            padding: 3.5rem 2.5rem;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid rgba(201,169,97,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover::before { transform: scaleX(1); }
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.1);
+            border-color: var(--gold);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .service-card p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        .price-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.95rem;
+        }
+
+        .price-item span:first-child { color: rgba(255,255,255,0.9); }
+        .price-item span:last-child {
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        /* Masters Section */
+        .masters {
+            background: var(--cream);
+        }
+
+        .masters-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .master-card {
+            text-align: center;
+            position: relative;
+            group: cursor;
+        }
+
+        .master-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 3px solid transparent;
+            transition: border-color 0.4s;
+        }
+
+        .master-card:hover .master-image-wrapper {
+            border-color: var(--gold);
+        }
+
+        .master-image {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s;
+        }
+
+        .master-card:hover .master-image {
+            transform: scale(1.05);
+        }
+
+        .master-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(15,61,62,0.9));
+            color: var(--white);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s;
+        }
+
+        .master-card:hover .master-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .master-card h4 {
+            font-size: 1.6rem;
+            color: var(--emerald);
+            margin-bottom: 0.5rem;
+        }
+
+        .master-role {
+            color: var(--gold);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .master-desc {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 0;
+            background: var(--emerald-dark);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .gallery-item {
+            height: 450px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.15);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15,61,62,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        .gallery-overlay span {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            border: 1px solid var(--gold);
+            padding: 1rem 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--cream) 0%, #f0ebe4 100%);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 5rem;
+            background: var(--white);
+            padding: 5rem;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gold);
+        }
+
+        .contact-info h3 {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: var(--emerald);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            color: var(--gold);
+            min-width: 40px;
+        }
+
+        .info-text h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--emerald);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .info-text p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--emerald);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #e5e7eb;
+            background: var(--cream);
+            font-family: 'Manrope', sans-serif;
+            font-size: 1rem;
+            color: var(--charcoal);
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(201,169,97,0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .btn-submit {
+            padding: 1.4rem;
+            background: var(--emerald);
+            color: var(--white);
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            background: var(--gold);
+            color: var(--emerald);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--emerald-dark);
+            color: var(--white);
+            padding: 6rem 2rem 3rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 2.5rem;
+            display: inline-block;
+            letter-spacing: 3px;
+        }
+
+        .footer-logo span { color: var(--gold); }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-socials a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.8rem 2rem;
+            border: 1px solid rgba(201,169,97,0.4);
+            transition: all 0.3s;
+        }
+
+        .footer-socials a:hover {
+            background: var(--gold);
+            color: var(--emerald);
+            border-color: var(--gold);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 3rem;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .masters-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 4.5rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .about-img-accent { display: none; }
+            .contact-container { grid-template-columns: 1fr; padding: 3rem; }
+            .section-title { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu { display: flex; }
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1.1rem; }
+            .services-grid,
+            .masters-grid,
+            .gallery-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .gallery-item { height: 350px; }
+            .nav-container { padding: 0 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">L'Esthétique<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">О салоне</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#masters">Мастера</a></li>
+                <li><a href="#gallery">Портфолио</a></li>
+                <li><a href="#contact">Контакты</a></li>
+                <li><button class="btn-nav">Записаться</button></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">Салон красоты и стиля</span>
+            <h1>Искусство быть <br>неотразимой</h1>
+            <p>Премиальный сервис, лучшие мастера города и атмосфера, в которой вы чувствуете себя королевой.</p>
+            <a href="#contact" class="btn-hero">Записаться онлайн</a>
+        </div>
+        <div class="scroll-indicator">↓ Прокрутите вниз</div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <div class="about-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=800" alt="Интерьер" class="about-img-main">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600" alt="Процесс" class="about-img-accent">
+                    </div>
+                </div>
+                <div class="about-content fade-in">
+                    <span class="section-subtitle">О нас</span>
+                    <h3>Место, где рождается ваша красота</h3>
+                    <p>L'Esthétique — это не просто салон красоты, это пространство вдохновения и заботы о себе. Мы объединили лучших специалистов города, премиальную косметику и уютную атмосферу, чтобы каждый ваш визит стал маленьким праздником.</p>
+                    <p>Наша философия проста: подчеркивать вашу естественную красоту, а не скрывать её. Мы используем только безопасные материалы и современные техники, постоянно обучаясь новым тенденциям в мире бьюти-индустрии.</p>
+                    <div class="signature">Елена Волкова, основатель</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-subtitle">Наши услуги</span>
+                <h2 class="section-title">Меню красоты</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <span class="service-icon">💇‍♀️</span>
+                    <h3>Парикмахерский зал</h3>
+                    <p>Стрижки, окрашивание любой сложности, укладки и лечение волос.</p>
+                    <ul class="price-list">
+                        <li class="price-item"><span>Женская стрижка</span><span>от 2 500 ₽</span></li>
+                        <li class="price-item"><span>Окрашивание в один тон</span><span>от 6 000 ₽</span></li>
+                        <li class="price-item"><span>Сложное окрашивание</span><span>от 12 000 ₽</span></li>
+                        <li class="price-item"><span>Укладка вечерняя</span><span>от 3 500 ₽</span></li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in">
+                    <span class="service-icon">💅</span>
+                    <h3>Ногтевой сервис</h3>
+                    <p>Безупречный маникюр и педикюр с покрытием премиум-класса.</p>
+                    <ul class="price-list">
+                        <li class="price-item"><span>Маникюр + покрытие</span><span>2 200 ₽</span></li>
+                        <li class="price-item"><span>Педикюр (полный)</span><span>3 000 ₽</span></li>
+                        <li class="price-item"><span>Дизайн (1 ноготь)</span><span>от 100 ₽</span></li>
+                        <li class="price-item"><span>Японский маникюр</span><span>2 800 ₽</span></li>
+                    </ul>
+                </div>
+                <div class="service-card fade-in">
+                    <span class="service-icon">✨</span>
+                    <h3>Косметология</h3>
+                    <p>Уход за лицом и телом, массаж и эстетические процедуры.</p>
+                    <ul class="price-list">
+                        <li class="price-item"><span>Чистка лица</span><span>от 4 500 ₽</span></li>
+                        <li class="price-item"><span>Пилинг</span><span>от 3 500 ₽</span></li>
+                        <li class="price-item"><span>Массаж лица</span><span>2 500 ₽</span></li>
+                        <li class="price-item"><span>Уход за кожей</span><span>от 3 000 ₽</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Masters Section -->
+    <section class="masters" id="masters">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-subtitle">Команда</span>
+                <h2 class="section-title">Наши мастера</h2>
+            </div>
+            <div class="masters-grid">
+                <div class="master-card fade-in">
+                    <div class="master-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600" alt="Анна" class="master-image">
+                        <div class="master-overlay">
+                            <span class="master-role">Топ-стилист</span>
+                            <p style="font-size:0.9rem">Сложные окрашивания</p>
+                        </div>
+                    </div>
+                    <h4>Анна Смирнова</h4>
+                    <span class="master-role">Топ-стилист</span>
+                    <p class="master-desc">Опыт 10 лет. Специалист по сложным окрашиваниям и стрижкам.</p>
+                </div>
+                <div class="master-card fade-in">
+                    <div class="master-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=600" alt="Мария" class="master-image">
+                        <div class="master-overlay">
+                            <span class="master-role">Мастер маникюра</span>
+                            <p style="font-size:0.9rem">Идеальная чистота</p>
+                        </div>
+                    </div>
+                    <h4>Мария Козлова</h4>
+                    <span class="master-role">Мастер маникюра</span>
+                    <p class="master-desc">Опыт 7 лет. Идеальная чистота и скорость. Любимец клиентов.</p>
+                </div>
+                <div class="master-card fade-in">
+                    <div class="master-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600" alt="Елена" class="master-image">
+                        <div class="master-overlay">
+                            <span class="master-role">Косметолог</span>
+                            <p style="font-size:0.9rem">Врач-дерматолог</p>
+                        </div>
+                    </div>
+                    <h4>Елена Власова</h4>
+                    <span class="master-role">Косметолог</span>
+                    <p class="master-desc">Врач-дерматолог. Подберет идеальный уход для вашей кожи.</p>
+                </div>
+                <div class="master-card fade-in">
+                    <div class="master-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" alt="Дмитрий" class="master-image">
+                        <div class="master-overlay">
+                            <span class="master-role">Барбер</span>
+                            <p style="font-size:0.9rem">Мужской стиль</p>
+                        </div>
+                    </div>
+                    <h4>Дмитрий Орлов</h4>
+                    <span class="master-role">Барбер</span>
+                    <p class="master-desc">Опыт 8 лет. Мужские стрижки и оформление бороды.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=600" alt="Стиль" class="gallery-img">
+                <div class="gallery-overlay"><span>Стиль</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1522337360705-8b13d52043a9?w=600" alt="Красота" class="gallery-img">
+                <div class="gallery-overlay"><span>Красота</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600" alt="Уход" class="gallery-img">
+                <div class="gallery-overlay"><span>Уход</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600" alt="Макияж" class="gallery-img">
+                <div class="gallery-overlay"><span>Макияж</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-container fade-in">
+                <div class="contact-info">
+                    <span class="section-subtitle">Контакты</span>
+                    <h3>Ждем вас в гости</h3>
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-text">
+                            <h4>Адрес</h4>
+                            <p>г. Москва, ул. Петровка, 12<br>БЦ «Стиль», 2 этаж</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🕐</div>
+                        <div class="info-text">
+                            <h4>Часы работы</h4>
+                            <p>Ежедневно: 10:00 — 22:00<br>Без выходных и праздников</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-text">
+                            <h4>Телефон</h4>
+                            <p>+7 (495) 123-45-67<br>+7 (999) 876-54-32</p>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Спасибо! Мы перезвоним вам в течение 15 минут для подтверждения записи.');">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" placeholder="Имя" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Услуга</label>
+                        <select id="service">
+                            <option value="" disabled selected>Выберите услугу</option>
+                            <option>Парикмахерский зал</option>
+                            <option>Ногтевой сервис</option>
+                            <option>Косметология</option>
+                            <option>Консультация</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Пожелания</label>
+                        <textarea id="message" placeholder="Удобное время или особые пожелания..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Записаться</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">L'Esthétique<span>.</span></div>
+        <div class="footer-socials">
+            <a href="#">Instagram</a>
+            <a href="#">Telegram</a>
+            <a href="#">WhatsApp</a>
+            <a href="#">VK</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 L'Esthétique Beauty Salon</p>
+            <p style="margin-top:1rem">
+                <a href="#">Политика конфиденциальности</a> | 
+                <a href="#">Договор оферты</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Mobile menu
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const nav = document.querySelector('.nav-links');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            Object.assign(nav.style, {
+                position: 'fixed', top: '0', left: '0', right: '0',
+                background: 'var(--emerald)', flexDirection: 'column',
+                padding: '6rem 2rem 2rem', gap: '1.5rem',
+                textAlign: 'center'
+            });
+        });
+
+        // Phone mask
+        document.getElementById('phone')?.addEventListener('input', function(e) {
+            let v = e.target.value.replace(/\D/g,'');
+            if (v[0]==='7'||v[0]==='8') v=v.slice(1);
+            let f = '+7';
+            if(v.length>0) f+=' ('+v.slice(0,3);
+            if(v.length>=3) f+=') '+v.slice(3,6);
+            if(v.length>=6) f+='-'+v.slice(6,8);
+            if(v.length>=8) f+='-'+v.slice(8,10);
+            e.target.value = f;
+        });
+    </script>
+</body>
+</html>
